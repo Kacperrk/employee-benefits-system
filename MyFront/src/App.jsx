@@ -6,7 +6,9 @@ function App() {
   const [name, setName] = useState('');
 
   // Zmienione na port 5229 (zgodnie z Twoim dotnet run)
-  const API_URL = 'https://localhost:7021/api/users';
+  // const API_URL = 'https://localhost:7021/api/users';
+  // const API_URL = 'http://localhost:5229/api/users';
+  const API_URL = 'http://localhost:5000/api/users';
 
   const fetchUsers = async () => {
     try {
