@@ -1,0 +1,69 @@
+# OS
+.DS_Store
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*~
+.nfs*
+
+# Logs
+*.log
+logs/
+
+# Node / React
+node_modules/
+dist/
+build/
+.vite/
+.cache/
+*.tsbuildinfo
+
+# .NET
+bin/
+obj/
+out/
+publish/
+*.user
+*.suo
+*.sln.docstates
+
+# Visual Studio
+.vs/
+
+# JetBrains
+.idea/
+*.sln.iml
+
+# VS Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/tasks.json
+
+# Docker
+docker-compose.override.yml
+*.dockerfile.local
+.docker/
+
+# PostgreSQL
+*.sql.backup
+*.dump
+*.backup
+
+# Tests / coverage
+coverage/
+*.coverage
+*.coveragexml
+TestResults/
+
+# Temp
+tmp/
+temp/
+*.tmp
+*.swp
+
+# Misc
+*.bak
+*.old
+*.orig
