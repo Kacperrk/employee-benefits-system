@@ -1,3 +1,12 @@
+C:\Users\User\Desktop\BenefityApka\Api\obj\Debug\net10.0\Api.csproj.AssemblyReference.cache
+C:\Users\User\Desktop\BenefityApka\Api\obj\Debug\net10.0\rpswa.dswa.cache.json
+C:\Users\User\Desktop\BenefityApka\Api\obj\Debug\net10.0\Api.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\User\Desktop\BenefityApka\Api\obj\Debug\net10.0\Api.AssemblyInfoInputs.cache
+C:\Users\User\Desktop\BenefityApka\Api\obj\Debug\net10.0\Api.AssemblyInfo.cs
+C:\Users\User\Desktop\BenefityApka\Api\obj\Debug\net10.0\Api.csproj.CoreCompileInputs.cache
+C:\Users\User\Desktop\BenefityApka\Api\obj\Debug\net10.0\Api.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\User\Desktop\BenefityApka\Api\obj\Debug\net10.0\Api.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\User\Desktop\BenefityApka\Api\obj\Debug\net10.0\Api.sourcelink.json
 C:\Users\User\Desktop\BenefityApka\Api\bin\Debug\net10.0\appsettings.Development.json
 C:\Users\User\Desktop\BenefityApka\Api\bin\Debug\net10.0\appsettings.json
 C:\Users\User\Desktop\BenefityApka\Api\bin\Debug\net10.0\Api.staticwebassets.endpoints.json
@@ -26,6 +35,9 @@ C:\Users\User\Desktop\BenefityApka\Api\bin\Debug\net10.0\Mono.TextTemplating.dll
 C:\Users\User\Desktop\BenefityApka\Api\bin\Debug\net10.0\Newtonsoft.Json.dll
 C:\Users\User\Desktop\BenefityApka\Api\bin\Debug\net10.0\Npgsql.dll
 C:\Users\User\Desktop\BenefityApka\Api\bin\Debug\net10.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
+C:\Users\User\Desktop\BenefityApka\Api\bin\Debug\net10.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\User\Desktop\BenefityApka\Api\bin\Debug\net10.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\User\Desktop\BenefityApka\Api\bin\Debug\net10.0\Swashbuckle.AspNetCore.SwaggerUI.dll
 C:\Users\User\Desktop\BenefityApka\Api\bin\Debug\net10.0\System.CodeDom.dll
 C:\Users\User\Desktop\BenefityApka\Api\bin\Debug\net10.0\System.Composition.AttributedModel.dll
 C:\Users\User\Desktop\BenefityApka\Api\bin\Debug\net10.0\System.Composition.Convention.dll
@@ -97,14 +109,6 @@ C:\Users\User\Desktop\BenefityApka\Api\bin\Debug\net10.0\ru\Microsoft.CodeAnalys
 C:\Users\User\Desktop\BenefityApka\Api\bin\Debug\net10.0\tr\Microsoft.CodeAnalysis.Workspaces.MSBuild.resources.dll
 C:\Users\User\Desktop\BenefityApka\Api\bin\Debug\net10.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.MSBuild.resources.dll
 C:\Users\User\Desktop\BenefityApka\Api\bin\Debug\net10.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.MSBuild.resources.dll
-C:\Users\User\Desktop\BenefityApka\Api\obj\Debug\net10.0\Api.csproj.AssemblyReference.cache
-C:\Users\User\Desktop\BenefityApka\Api\obj\Debug\net10.0\rpswa.dswa.cache.json
-C:\Users\User\Desktop\BenefityApka\Api\obj\Debug\net10.0\Api.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\User\Desktop\BenefityApka\Api\obj\Debug\net10.0\Api.AssemblyInfoInputs.cache
-C:\Users\User\Desktop\BenefityApka\Api\obj\Debug\net10.0\Api.AssemblyInfo.cs
-C:\Users\User\Desktop\BenefityApka\Api\obj\Debug\net10.0\Api.csproj.CoreCompileInputs.cache
-C:\Users\User\Desktop\BenefityApka\Api\obj\Debug\net10.0\Api.MvcApplicationPartsAssemblyInfo.cs
-C:\Users\User\Desktop\BenefityApka\Api\obj\Debug\net10.0\Api.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\User\Desktop\BenefityApka\Api\obj\Debug\net10.0\rjimswa.dswa.cache.json
 C:\Users\User\Desktop\BenefityApka\Api\obj\Debug\net10.0\rjsmrazor.dswa.cache.json
 C:\Users\User\Desktop\BenefityApka\Api\obj\Debug\net10.0\rjsmcshtml.dswa.cache.json
@@ -120,7 +124,4 @@ C:\Users\User\Desktop\BenefityApka\Api\obj\Debug\net10.0\refint\Api.dll
 C:\Users\User\Desktop\BenefityApka\Api\obj\Debug\net10.0\Api.pdb
 C:\Users\User\Desktop\BenefityApka\Api\obj\Debug\net10.0\Api.genruntimeconfig.cache
 C:\Users\User\Desktop\BenefityApka\Api\obj\Debug\net10.0\ref\Api.dll
-C:\Users\User\Desktop\BenefityApka\Api\bin\Debug\net10.0\Swashbuckle.AspNetCore.Swagger.dll
-C:\Users\User\Desktop\BenefityApka\Api\bin\Debug\net10.0\Swashbuckle.AspNetCore.SwaggerGen.dll
-C:\Users\User\Desktop\BenefityApka\Api\bin\Debug\net10.0\Swashbuckle.AspNetCore.SwaggerUI.dll
 C:\Users\User\Desktop\BenefityApka\Api\obj\Debug\net10.0\staticwebassets.upToDateCheck.txt

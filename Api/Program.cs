@@ -1,18 +1,15 @@
-using Api.Models;
+using Api.Data; // Dodaj to, żeby widział AppDbContext
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// --- SERWISY ---
-
-// 1. PostgreSQL - upewnij się, że w appsettings masz ConnectionStrings:DefaultConnection
-builder.Services.AddDbContext<DataContext>(options =>
+// 1. PostgreSQL - Używamy poprawnej nazwy: AppDbContext
+builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-// 2. Kontrolery
 builder.Services.AddControllers();
 
-// 3. CORS - kluczowe dla Reacta
+// 2. CORS - Pozwala Reactowi (np. port 5173) gadać z API
 builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(policy =>
@@ -23,25 +20,23 @@ builder.Services.AddCors(options =>
     });
 });
 
-// 4. Swagger (Klasyczny interfejs graficzny)
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
 // --- MIDDLEWARE ---
-
-// Włączamy Swaggera zawsze w trybie Development
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI(); // To daje interfejs pod adresem /swagger
+    app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+// app.UseHttpsRedirection(); // Możesz to zahaszować, jeśli masz problemy z certyfikatami na localhost
 
-// CORS musi być przed MapControllers!
 app.UseCors();
+
+app.UseAuthorization(); // To warto mieć już teraz
 
 app.MapControllers();
 
