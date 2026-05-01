@@ -26,18 +26,18 @@ docker compose down -v
 
 ## Aplikacja
 
-* Frontend: [http://localhost:5173](http://localhost:5173)
-* Swagger:  [http://localhost:5000/swagger](http://localhost:5000/swagger)
+* Frontend: [http://127.0.0.1:5173](http://127.0.0.1:5173)
+* Swagger:  [http://127.0.0.1:5000/swagger](http://127.0.0.1:5000/swagger)
 
 ## API
 
-* Users: [http://localhost:5000/api/users](http://localhost:5000/api/users)
-* Benefits: [http://localhost:5000/api/benefits](http://localhost:5000/api/benefits)
-* Benefit Requests: [http://localhost:5000/api/benefitrequests](http://localhost:5000/api/benefitrequests)
+* Users: [http://127.0.0.1:5000/api/users](http://127.0.0.1:5000/api/users)
+* Benefits: [http://127.0.0.1:5000/api/benefits](http://127.0.0.1:5000/api/benefits)
+* Benefit Requests: [http://127.0.0.1:5000/api/benefitrequests](http://127.0.0.1:5000/api/benefitrequests)
 
 ## Baza danych
 
-* Host: localhost
+* Host: 127.0.0.1
 * Port: 5433
 * Database: mojadatabaza
 * User: admin
