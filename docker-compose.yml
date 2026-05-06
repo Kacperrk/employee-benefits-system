@@ -8,7 +8,7 @@ services:
       POSTGRES_PASSWORD: secret
       POSTGRES_DB: mojadatabaza
     ports:
-      - "5433:5432"
+      - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
@@ -21,10 +21,10 @@ services:
     depends_on:
       - db
     ports:
-      - "5000:8080"
+      - "5000:5000" # Zmieniamy z 5000:8080 na 5000:5000
     environment:
       ASPNETCORE_ENVIRONMENT: Development
-      ASPNETCORE_URLS: http://+:8080
+      ASPNETCORE_URLS: http://+:5000 # Backend słucha teraz na 5000
       ConnectionStrings__DefaultConnection: Host=db;Port=5432;Database=mojadatabaza;Username=admin;Password=secret
 
   frontend:

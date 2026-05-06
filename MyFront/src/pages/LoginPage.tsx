@@ -2,14 +2,14 @@ import { useState } from 'react'
 import { authApi } from '../api'
 
 type Props = {
-  onLogin: (userId: number, userName: string, role: string) => void
+  onLogin: (userId: number, userName: string, role: string, token: string) => void
 }
 
 export default function LoginPage({ onLogin }: Props) {
   const [tab, setTab] = useState<'login' | 'register'>('login')
   const [login, setLogin] = useState('000')
   const [password, setPassword] = useState('1')
-  const [regData, setRegData] = useState({ login: '', password: '', firstName: '', lastName: '', role: 'employee' })
+  const [regData, setRegData] = useState({ login: '', password: '', firstName: '', lastName: '' })
   const [message, setMessage] = useState('')
   const [loading, setLoading] = useState(false)
 
@@ -20,7 +20,12 @@ export default function LoginPage({ onLogin }: Props) {
     try {
       const res = await authApi.login(login, password)
       const d = res.data
-      onLogin(d.userId ?? d.UserId, d.user ?? d.User, (d.role ?? d.Role).toLowerCase())
+      onLogin(
+        d.userId ?? d.UserId,
+        d.user  ?? d.User,
+        (d.role ?? d.Role).toLowerCase(),
+        d.token ?? d.Token
+      )
     } catch {
       setMessage('Nieprawidłowy login lub hasło')
     } finally {
@@ -96,14 +101,17 @@ export default function LoginPage({ onLogin }: Props) {
               <label>Hasło</label>
               <input type="password" value={regData.password} onChange={e => setRegData({ ...regData, password: e.target.value })} placeholder="••••••" required />
             </div>
-           
             <button type="submit" className="btn-primary" disabled={loading}>
               {loading ? 'Tworzenie konta...' : 'Zarejestruj się →'}
             </button>
           </form>
         )}
 
-        {message && <div className={`auth-msg ${message.includes('Błąd') || message.includes('Nie') ? 'error' : 'success'}`}>{message}</div>}
+        {message && (
+          <div className={`auth-msg ${message.includes('Błąd') || message.includes('Nie') ? 'error' : 'success'}`}>
+            {message}
+          </div>
+        )}
       </div>
     </div>
   )

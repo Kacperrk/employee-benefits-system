@@ -18,6 +18,10 @@ build/
 .cache/
 *.tsbuildinfo
 
+# Storybook (skoro go nie potrzebujesz)
+.storybook-static/
+storybook-static/
+
 # .NET
 bin/
 obj/
@@ -27,14 +31,10 @@ publish/
 *.suo
 *.sln.docstates
 
-# Visual Studio
+# Visual Studio / VS Code
 .vs/
-
-# JetBrains
 .idea/
 *.sln.iml
-
-# VS Code
 .vscode/*
 !.vscode/settings.json
 !.vscode/launch.json
@@ -46,10 +46,16 @@ docker-compose.override.yml
 *.dockerfile.local
 .docker/
 
-# PostgreSQL
+# PostgreSQL / Data
 *.sql.backup
 *.dump
 *.backup
+postgres_data/
+
+# Environment / Secrets
+.env
+.env.local
+.env.*.local
 
 # Tests / coverage
 coverage/
@@ -57,13 +63,11 @@ coverage/
 *.coveragexml
 TestResults/
 
-# Temp
+# Temp / Misc
 tmp/
 temp/
 *.tmp
 *.swp
-
-# Misc
 *.bak
 *.old
 *.orig

@@ -1,5 +1,6 @@
-﻿using Api.Data;
+using Api.Data;
 using Api.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,6 +8,7 @@ namespace Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize]
     public class BenefitsController : ControllerBase
     {
         private readonly AppDbContext _context;
@@ -21,13 +23,14 @@ namespace Api.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "administrator")]
         public async Task<IActionResult> AddBenefit([FromBody] BenefitDto dto)
         {
             var benefit = new Benefit
             {
-                name = dto.Name,
+                name        = dto.Name,
                 cost_points = dto.CostPoints,
-                active = true
+                active      = true
             };
             _context.Benefits.Add(benefit);
             await _context.SaveChangesAsync();
@@ -35,6 +38,7 @@ namespace Api.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "administrator")]
         public async Task<IActionResult> DeactivateBenefit(int id)
         {
             var benefit = await _context.Benefits.FindAsync(id);
@@ -48,23 +52,17 @@ namespace Api.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetBenefitById(int id)
         {
-            // Szukamy benefitu w bazie po jego ID
             var benefit = await _context.Benefits.FindAsync(id);
-
-            // Jeśli benefit nie istnieje, zwracamy 404
             if (benefit == null)
-            {
                 return NotFound(new { message = $"Benefit o ID {id} nie został znaleziony." });
-            }
 
-            // Zwracamy znaleziony benefit
             return Ok(benefit);
         }
     }
 
     public class BenefitDto
     {
-        public string Name { get; set; } = string.Empty;
-        public int CostPoints { get; set; }
+        public string Name      { get; set; } = string.Empty;
+        public int    CostPoints { get; set; }
     }
 }

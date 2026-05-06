@@ -1,5 +1,6 @@
-﻿using Api.Data;
+using Api.Data;
 using Api.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,6 +8,7 @@ namespace Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize] // Każdy endpoint wymaga zalogowania
     public class UsersController : ControllerBase
     {
         private readonly AppDbContext _context;
@@ -17,6 +19,7 @@ namespace Api.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "administrator")]
         public async Task<IActionResult> GetAllUsers()
         {
             var users = await _context.Users.ToListAsync();
@@ -24,21 +27,21 @@ namespace Api.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "administrator")]
         public async Task<IActionResult> CreateUser([FromBody] CreateUserDto dto)
         {
-            // Sprawdź czy login zajęty
             if (await _context.Users.AnyAsync(u => u.login == dto.Login))
                 return BadRequest("Login jest już zajęty.");
 
             var user = new User
             {
-                first_name = dto.FirstName,
-                last_name = dto.LastName,
-                login = dto.Login,
-                password_hash = dto.Password, // BCrypt w produkcji!
-                role = UserRole.employee, // ZAWSZE employee przy rejestracji
-                points = 0,
-                active = true
+                first_name    = dto.FirstName,
+                last_name     = dto.LastName,
+                login         = dto.Login,
+                password_hash = dto.Password,
+                role          = UserRole.employee,
+                points        = 100,
+                active        = true
             };
 
             _context.Users.Add(user);
@@ -47,6 +50,7 @@ namespace Api.Controllers
         }
 
         [HttpPut("{id}/points")]
+        [Authorize(Roles = "administrator")]
         public async Task<IActionResult> AssignPoints(int id, [FromBody] int points)
         {
             var user = await _context.Users.FindAsync(id);
@@ -57,15 +61,10 @@ namespace Api.Controllers
             return Ok(new { message = "Punkty zaktualizowane" });
         }
 
-        // Tylko admin może zmienić rolę pracownikowi
         [HttpPut("{id}/role")]
+        [Authorize(Roles = "administrator")]
         public async Task<IActionResult> ChangeRole(int id, [FromBody] ChangeRoleDto dto)
         {
-            // Sprawdź czy wykonujący jest adminem
-            var requester = await _context.Users.FindAsync(dto.RequesterId);
-            if (requester == null || requester.role != UserRole.administrator)
-                return Forbid();
-
             var target = await _context.Users.FindAsync(id);
             if (target == null) return NotFound();
 
@@ -91,15 +90,14 @@ namespace Api.Controllers
     public class CreateUserDto
     {
         public string FirstName { get; set; } = string.Empty;
-        public string LastName { get; set; } = string.Empty;
-        public string Login { get; set; } = string.Empty;
-        public string Password { get; set; } = string.Empty;
-        // Rola celowo usunięta — zawsze employee
+        public string LastName  { get; set; } = string.Empty;
+        public string Login     { get; set; } = string.Empty;
+        public string Password  { get; set; } = string.Empty;
     }
 
     public class ChangeRoleDto
     {
-        public int RequesterId { get; set; } // ID admina który wykonuje zmianę
         public string NewRole { get; set; } = "employee";
+        // RequesterId usunięty — teraz sprawdzamy rolę przez token JWT
     }
 }

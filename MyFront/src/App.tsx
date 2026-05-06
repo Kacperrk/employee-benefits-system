@@ -27,12 +27,14 @@ export default function App() {
     }
   }, [message])
 
-  function handleLogin(userId: number, userName: string, role: string) {
+  function handleLogin(userId: number, userName: string, role: string, token: string) {
+    localStorage.setItem('token', token)
     setAuth({ logged: true, userId, userName, role })
     setActiveTab('benefits')
   }
 
   function handleLogout() {
+    localStorage.removeItem('token')
     setAuth({ logged: false, userId: 0, userName: '', role: '' })
     setMessage('')
   }
@@ -80,6 +82,7 @@ export default function App() {
         {activeTab === 'users' && auth.role === 'administrator' && (
           <UsersSection
             users={users}
+            adminId={auth.userId}
             onRefresh={loadData}
             onMessage={setMessage}
           />
