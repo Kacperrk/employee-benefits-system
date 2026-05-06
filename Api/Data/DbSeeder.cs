@@ -17,8 +17,8 @@ public static class DbSeeder
                 {
                     first_name = "Admin",
                     last_name = "System",
-                    login = "000",
-                    password_hash = "1",
+                    login = "admin",
+                    password_hash = "admin",
                     role = UserRole.administrator,
                     points = 1000,
                     active = true
