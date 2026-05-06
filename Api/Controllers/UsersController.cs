@@ -52,6 +52,23 @@ namespace Api.Controllers
             await _context.SaveChangesAsync();
             return Ok(new { message = "Punkty zaktualizowane" });
         }
+
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetUserById(int id)
+        {
+            // Szukamy użytkownika po ID
+            var user = await _context.Users.FindAsync(id);
+
+            // Jeśli nie znaleziono, zwracamy 404
+            if (user == null)
+            {
+                return NotFound(new { message = $"Użytkownik o ID {id} nie istnieje." });
+            }
+
+            // Zwracamy obiekt użytkownika
+            return Ok(user);
+        }
     }
 
     public class CreateUserDto

@@ -44,6 +44,22 @@ namespace Api.Controllers
             await _context.SaveChangesAsync();
             return Ok(new { message = "Benefit dezaktywowany" });
         }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetBenefitById(int id)
+        {
+            // Szukamy benefitu w bazie po jego ID
+            var benefit = await _context.Benefits.FindAsync(id);
+
+            // Jeśli benefit nie istnieje, zwracamy 404
+            if (benefit == null)
+            {
+                return NotFound(new { message = $"Benefit o ID {id} nie został znaleziony." });
+            }
+
+            // Zwracamy znaleziony benefit
+            return Ok(benefit);
+        }
     }
 
     public class BenefitDto
