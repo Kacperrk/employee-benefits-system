@@ -19,7 +19,7 @@ namespace Api.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "administrator")]
+        [Authorize]
         public async Task<IActionResult> GetAllUsers()
         {
             var users = await _context.Users.ToListAsync();
@@ -35,13 +35,13 @@ namespace Api.Controllers
 
             var user = new User
             {
-                first_name    = dto.FirstName,
-                last_name     = dto.LastName,
-                login         = dto.Login,
+                first_name = dto.FirstName,
+                last_name = dto.LastName,
+                login = dto.Login,
                 password_hash = dto.Password,
-                role          = UserRole.employee,
-                points        = 100,
-                active        = true
+                role = UserRole.employee,
+                points = 100,
+                active = true
             };
 
             _context.Users.Add(user);
@@ -90,9 +90,9 @@ namespace Api.Controllers
     public class CreateUserDto
     {
         public string FirstName { get; set; } = string.Empty;
-        public string LastName  { get; set; } = string.Empty;
-        public string Login     { get; set; } = string.Empty;
-        public string Password  { get; set; } = string.Empty;
+        public string LastName { get; set; } = string.Empty;
+        public string Login { get; set; } = string.Empty;
+        public string Password { get; set; } = string.Empty;
     }
 
     public class ChangeRoleDto

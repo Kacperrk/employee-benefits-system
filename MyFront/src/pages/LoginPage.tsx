@@ -7,7 +7,7 @@ type Props = {
 
 export default function LoginPage({ onLogin }: Props) {
   const [tab, setTab] = useState<'login' | 'register'>('login')
-  const [login, setLogin] = useState('000')
+  const [login, setLogin] = useState('001')
   const [password, setPassword] = useState('1')
   const [regData, setRegData] = useState({ login: '', password: '', firstName: '', lastName: '' })
   const [message, setMessage] = useState('')
@@ -79,7 +79,7 @@ export default function LoginPage({ onLogin }: Props) {
             <button type="submit" className="btn-primary" disabled={loading}>
               {loading ? 'Logowanie...' : 'Zaloguj się →'}
             </button>
-            <p className="hint">Demo: Admin <code>000 / 1</code> · Pracownik <code>001 / 1</code></p>
+            <p className="hint">Demo: Admin <code>admin / admin</code> · Pracownik <code>001 / 1</code></p>
           </form>
         ) : (
           <form onSubmit={handleRegister} className="auth-form">
