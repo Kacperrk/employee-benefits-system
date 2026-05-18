@@ -9,7 +9,14 @@ import { useData } from './hooks/useData'
 import './index.css'
 
 export default function App() {
-  const [auth, setAuth] = useState<AuthState>({ logged: false, userId: 0, userName: '', role: '' })
+  const savedAuth = localStorage.getItem('auth')
+
+  const [auth, setAuth] = useState<AuthState>(
+    savedAuth
+      ? { logged: true, ...JSON.parse(savedAuth) }
+      : { logged: false, userId: 0, userName: '', role: '' }
+  )
+
   const [message, setMessage] = useState('')
   const [activeTab, setActiveTab] = useState('benefits')
   const { users, benefits, requests, loadData } = useData()
@@ -29,12 +36,15 @@ export default function App() {
 
   function handleLogin(userId: number, userName: string, role: string, token: string) {
     localStorage.setItem('token', token)
+    localStorage.setItem('auth', JSON.stringify({ userId, userName, role }))
+
     setAuth({ logged: true, userId, userName, role })
     setActiveTab('benefits')
   }
 
   function handleLogout() {
     localStorage.removeItem('token')
+    localStorage.removeItem('auth')
     setAuth({ logged: false, userId: 0, userName: '', role: '' })
     setMessage('')
   }
