@@ -28,6 +28,8 @@ namespace Api.Controllers
             if (user.points < benefit.cost_points)
                 return BadRequest("Brak wystarczającej liczby punktów");
 
+            user.points -= benefit.cost_points;
+
             var request = new BenefitRequest
             {
                 user_id = dto.UserId,
@@ -76,14 +78,11 @@ namespace Api.Controllers
 
             if (newStatus.ToLower() == "approved")
             {
-                if (request.User.points < request.Benefit.cost_points)
-                    return BadRequest("Pracownik nie ma już wystarczającej liczby punktów.");
-
-                request.User.points -= request.Benefit.cost_points;
                 request.status = RequestStatus.approved;
             }
             else if (newStatus.ToLower() == "rejected")
             {
+                request.User.points += request.Benefit.cost_points;
                 request.status = RequestStatus.rejected;
             }
             else
