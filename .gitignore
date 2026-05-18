@@ -18,9 +18,12 @@ build/
 .cache/
 *.tsbuildinfo
 
-# Storybook (skoro go nie potrzebujesz)
+# Storybook
 .storybook-static/
 storybook-static/
+MyFront/docs/
+MyFront/src/stories/
+MyFront/.storybook/
 
 # .NET
 bin/
