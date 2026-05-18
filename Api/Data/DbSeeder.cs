@@ -24,14 +24,14 @@ public static class DbSeeder
                     active = true
                 },
 
-                new User { first_name = "Jan", last_name = "Kowalski", login = "001", password_hash = "1", role = UserRole.employee, points = 1200, active = true },
-                new User { first_name = "Piotr", last_name = "Zieliński", login = "002", password_hash = "1", role = UserRole.employee, points = 1150, active = true },
-                new User { first_name = "Kasia", last_name = "Wiśniewska", login = "003", password_hash = "1", role = UserRole.employee, points = 1300, active = true },
-                new User { first_name = "Marek", last_name = "Wójcik", login = "004", password_hash = "1", role = UserRole.employee, points = 1050, active = true },
-                new User { first_name = "Ewa", last_name = "Kamińska", login = "005", password_hash = "1", role = UserRole.employee, points = 1420, active = true },
-                new User { first_name = "Tomasz", last_name = "Lewandowski", login = "006", password_hash = "1", role = UserRole.employee, points = 1090, active = true },
-                new User { first_name = "Ola", last_name = "Dąbrowska", login = "007", password_hash = "1", role = UserRole.employee, points = 1260, active = true },
-                new User { first_name = "Paweł", last_name = "Kaczmarek", login = "008", password_hash = "1", role = UserRole.employee, points = 1120, active = true }
+                new User { first_name = "Jan", last_name = "Kowalski", login = "001", password_hash = "1", role = UserRole.employee, points = 200, active = true },
+                new User { first_name = "Piotr", last_name = "Zieliński", login = "002", password_hash = "1", role = UserRole.employee, points = 150, active = true },
+                new User { first_name = "Kasia", last_name = "Wiśniewska", login = "003", password_hash = "1", role = UserRole.employee, points = 300, active = true },
+                new User { first_name = "Marek", last_name = "Wójcik", login = "004", password_hash = "1", role = UserRole.employee, points = 50, active = true },
+                new User { first_name = "Ewa", last_name = "Kamińska", login = "005", password_hash = "1", role = UserRole.employee, points = 450, active = true },
+                new User { first_name = "Tomasz", last_name = "Lewandowski", login = "006", password_hash = "1", role = UserRole.employee, points = 100, active = true },
+                new User { first_name = "Ola", last_name = "Dąbrowska", login = "007", password_hash = "1", role = UserRole.employee, points = 250, active = true },
+                new User { first_name = "Paweł", last_name = "Kaczmarek", login = "008", password_hash = "1", role = UserRole.employee, points = 150, active = true }
             };
 
             context.Users.AddRange(users);
