@@ -8,23 +8,19 @@ using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// --- 1. Konfiguracja Bazy Danych ---
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-// --- 2. Konfiguracja CORS ---
-// Definiujemy politykę "FrontendPolicy", aby mieć nad nią pełną kontrolę
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("FrontendPolicy", policy =>
     {
-        policy.AllowAnyOrigin()   // W produkcji zamień na .WithOrigins("http://localhost:5173")
+        policy.AllowAnyOrigin()
               .AllowAnyHeader()
               .AllowAnyMethod();
     });
 });
 
-// --- 3. Konfiguracja JWT ---
 var jwtKey = builder.Configuration["Jwt:Key"]!;
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
@@ -77,25 +73,21 @@ builder.Services.AddSwaggerGen(c =>
 
 var app = builder.Build();
 
-// --- 4. Seeding Bazy Danych ---
 using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
     await DbSeeder.SeedAsync(db);
 }
 
-// --- 5. Middleware Pipeline ---
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
-// KOLEJNOŚĆ JEST KLUCZOWA:
-app.UseRouting(); 
+app.UseRouting();
 
-// UseCors musi być po UseRouting, ale przed UseAuthentication
-app.UseCors("FrontendPolicy"); 
+app.UseCors("FrontendPolicy");
 
 app.UseAuthentication();
 app.UseAuthorization();

@@ -3,7 +3,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Api.Models
 {
-    // Typy ENUM zgodne z Twoim SQL
     public enum UserRole { employee, administrator }
     public enum RequestStatus { pending, approved, rejected }
 

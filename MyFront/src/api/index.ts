@@ -4,14 +4,12 @@ export const API = 'http://localhost:5000/api'
 
 const client = axios.create({ baseURL: API })
 
-// Dołącz token JWT do każdego requestu automatycznie
 client.interceptors.request.use(config => {
   const token = localStorage.getItem('token')
   if (token) config.headers.Authorization = `Bearer ${token}`
   return config
 })
 
-// Jeśli backend zwróci 401 — wyczyść token i odśwież stronę (wyloguj)
 client.interceptors.response.use(
   res => res,
   err => {

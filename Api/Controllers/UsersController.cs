@@ -8,7 +8,7 @@ namespace Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    [Authorize] // Każdy endpoint wymaga zalogowania
+    [Authorize]
     public class UsersController : ControllerBase
     {
         private readonly AppDbContext _context;
@@ -98,6 +98,5 @@ namespace Api.Controllers
     public class ChangeRoleDto
     {
         public string NewRole { get; set; } = "employee";
-        // RequesterId usunięty — teraz sprawdzamy rolę przez token JWT
     }
 }

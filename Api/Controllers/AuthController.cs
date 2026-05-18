@@ -19,10 +19,9 @@ namespace Api.Controllers
         public AuthController(AppDbContext context, IConfiguration config)
         {
             _context = context;
-            _config  = config;
+            _config = config;
         }
 
-        // --- REJESTRACJA ---
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterDto request)
         {
@@ -31,13 +30,13 @@ namespace Api.Controllers
 
             var newUser = new User
             {
-                first_name    = request.FirstName,
-                last_name     = request.LastName,
-                login         = request.Login,
-                password_hash = request.Password, // W produkcji: BCrypt!
-                role          = UserRole.employee,
-                points        = 100,
-                active        = true
+                first_name = request.FirstName,
+                last_name = request.LastName,
+                login = request.Login,
+                password_hash = request.Password,
+                role = UserRole.employee,
+                points = 100,
+                active = true
             };
 
             _context.Users.Add(newUser);
@@ -46,7 +45,6 @@ namespace Api.Controllers
             return Ok(new { message = "Rejestracja zakończona sukcesem" });
         }
 
-        // --- LOGOWANIE ---
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginDto request)
         {
@@ -63,15 +61,14 @@ namespace Api.Controllers
 
             return Ok(new
             {
-                Token  = token,
-                Role   = user.role.ToString(),
-                User   = $"{user.first_name} {user.last_name}",
+                Token = token,
+                Role = user.role.ToString(),
+                User = $"{user.first_name} {user.last_name}",
                 UserId = user.id,
                 Points = user.points
             });
         }
 
-        // --- GENEROWANIE TOKENU ---
         private string GenerateJwtToken(User user)
         {
             var claims = new[]
@@ -81,14 +78,14 @@ namespace Api.Controllers
                 new Claim(ClaimTypes.Role,           user.role.ToString()),
             };
 
-            var key   = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]!));
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]!));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
             var token = new JwtSecurityToken(
-                issuer:             _config["Jwt:Issuer"],
-                audience:           _config["Jwt:Audience"],
-                claims:             claims,
-                expires:            DateTime.UtcNow.AddHours(8),
+                issuer: _config["Jwt:Issuer"],
+                audience: _config["Jwt:Audience"],
+                claims: claims,
+                expires: DateTime.UtcNow.AddHours(8),
                 signingCredentials: creds
             );
 
@@ -98,15 +95,15 @@ namespace Api.Controllers
 
     public class LoginDto
     {
-        public string Login    { get; set; } = string.Empty;
+        public string Login { get; set; } = string.Empty;
         public string Password { get; set; } = string.Empty;
     }
 
     public class RegisterDto
     {
         public string FirstName { get; set; } = string.Empty;
-        public string LastName  { get; set; } = string.Empty;
-        public string Login     { get; set; } = string.Empty;
-        public string Password  { get; set; } = string.Empty;
+        public string LastName { get; set; } = string.Empty;
+        public string Login { get; set; } = string.Empty;
+        public string Password { get; set; } = string.Empty;
     }
 }

@@ -19,7 +19,7 @@ namespace Api.Controllers
         [Authorize(Roles = "employee")]
         public async Task<IActionResult> SubmitRequest([FromBody] RequestDto dto)
         {
-            var user    = await _context.Users.FindAsync(dto.UserId);
+            var user = await _context.Users.FindAsync(dto.UserId);
             var benefit = await _context.Benefits.FindAsync(dto.BenefitId);
 
             if (user == null || benefit == null)
@@ -30,9 +30,9 @@ namespace Api.Controllers
 
             var request = new BenefitRequest
             {
-                user_id      = dto.UserId,
-                benefit_id   = dto.BenefitId,
-                status       = RequestStatus.pending,
+                user_id = dto.UserId,
+                benefit_id = dto.BenefitId,
+                status = RequestStatus.pending,
                 request_date = DateTime.UtcNow
             };
 
@@ -47,10 +47,11 @@ namespace Api.Controllers
             var requests = await _context.BenefitRequests
                 .Include(r => r.User)
                 .Include(r => r.Benefit)
-                .Select(r => new {
+                .Select(r => new
+                {
                     r.id,
-                    User         = $"{r.User.first_name} {r.User.last_name}",
-                    Benefit      = r.Benefit.name,
+                    User = $"{r.User.first_name} {r.User.last_name}",
+                    Benefit = r.Benefit.name,
                     r.status,
                     r.request_date
                 })
@@ -70,7 +71,6 @@ namespace Api.Controllers
 
             if (request == null) return NotFound();
 
-            // Blokada ponownego rozpatrzenia
             if (request.status != RequestStatus.pending)
                 return BadRequest("Wniosek został już rozpatrzony.");
 
@@ -80,7 +80,7 @@ namespace Api.Controllers
                     return BadRequest("Pracownik nie ma już wystarczającej liczby punktów.");
 
                 request.User.points -= request.Benefit.cost_points;
-                request.status       = RequestStatus.approved;
+                request.status = RequestStatus.approved;
             }
             else if (newStatus.ToLower() == "rejected")
             {
@@ -99,7 +99,7 @@ namespace Api.Controllers
 
     public class RequestDto
     {
-        public int UserId    { get; set; }
+        public int UserId { get; set; }
         public int BenefitId { get; set; }
     }
 }
