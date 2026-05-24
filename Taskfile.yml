@@ -1,0 +1,28 @@
+version: "3"
+
+tasks:
+  up:
+    desc: Zwyczajny start kontenerów
+    cmds:
+      - docker compose up --build -d
+      - docker ps
+
+  down:
+    desc: Zwyczajne zatrzymanie kontenerów
+    cmds:
+      - docker compose down
+      - docker ps
+
+  remove-postgres-data:
+    desc: Usuń dane Postgresa
+    cmds:
+      - docker compose down -v
+      - docker ps
+
+  build-clean:
+    desc: Awaryjny rebuild - usuwa nieużywane zasoby Dockera
+    cmds:
+      - docker compose down -v
+      - docker system prune -f -a
+      - docker compose up --build --force-recreate
+      - docker ps -a
